@@ -2,17 +2,16 @@ import React from 'react';
 import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
 
 const OPTIONS: Option[] = [
-  { label: 'nextjs', value: 'nextjs' },
-  { label: 'React', value: 'react' },
-  { label: 'Remix', value: 'remix' },
-  { label: 'Vite', value: 'vite' },
-  { label: 'Nuxt', value: 'nuxt' },
-  { label: 'Vue', value: 'vue' },
-  { label: 'Svelte', value: 'svelte' },
-  { label: 'Angular', value: 'angular' },
-  { label: 'Ember', value: 'ember', disable: true },
-  { label: 'Gatsby', value: 'gatsby', disable: true },
-  { label: 'Astro', value: 'astro' },
+  { label: 'Swimming', value: 'swimming' },
+  { label: 'Cricket', value: 'cricket' },
+  { label: 'Gaming', value: 'gaming' },
+  { label: 'Reading', value: 'reading' },
+  { label: 'Cooking', value: 'cooking' },
+  { label: 'Traveling', value: 'traveling' },
+  { label: 'Photography', value: 'photography' },
+  { label: 'Painting', value: 'painting', disable: true },
+  { label: 'Writing', value: 'writing', disable: true },
+  { label: 'Music', value: 'music' },
 ];
 
 const MultipleSelectorDemo = () => {
@@ -20,10 +19,10 @@ const MultipleSelectorDemo = () => {
     <div className="w-full px-10">
       <MultipleSelector
         defaultOptions={OPTIONS}
-        placeholder="Select Your Intrests..."
+        placeholder="Select Your Interests..."
         emptyIndicator={
           <p className="text-center text-lg leading-10">
-            no results found.
+            No results found.
           </p>
         }
       />
@@ -32,3 +31,4 @@ const MultipleSelectorDemo = () => {
 };
 
 export default MultipleSelectorDemo;
+
