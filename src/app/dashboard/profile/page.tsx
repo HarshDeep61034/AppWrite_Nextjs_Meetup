@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -9,72 +9,91 @@ import { DialogDemo } from "@/components/DialogDemo";
 import MultipleSelectorDemo from "@/components/MultipleSelector";
 
 export default function Component() {
-    const [user, setUser] = useState<any>(null);
-    const [profile, setProfile] = useState<any>(null);
-    const [open, setOpen] = useState(false);
-    async function getUser(){
-      try{
-        const response = await account.getSession('current');
-        const userResponse = await account.get(); // Fetch the user details
-        setUser(userResponse);
-        const res = await database.getDocument('669df904001bd01960db', '669df922001cf2f83cf6', userResponse.email);
-        console.log(res);
-        setProfile(res);
-        console.log(userResponse);
-      }
-      catch(e){
-        console.error(e);
-      }
-    
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
+  const [open, setOpen] = useState(false);
+
+  async function getUser() {
+    try {
+      const sessionResponse = await account.getSession("current");
+      const userResponse = await account.get(); // Fetch the user details
+      setUser(userResponse);
+      const profileResponse = await database.getDocument(
+        "669df904001bd01960db",
+        "669df922001cf2f83cf6",
+        userResponse.email
+      );
+      setProfile(profileResponse);
+      console.log(userResponse);
+    } catch (e) {
+      console.error(e);
     }
+  }
 
-    useEffect(() => {
-      getUser();
-      console.log(user);
-    }, []);
+  useEffect(() => {
+    getUser();
+    console.log(user);
+  }, []);
 
-    
-
-    async function createProfile(){
-        const response = await database.createDocument(
-            '669df904001bd01960db',
-            '669df922001cf2f83cf6',
-            ID.unique(),
-            {
-              userId: user.email,
-            }
-        );
-        console.log(response);
+  async function createProfile() {
+    try {
+      const response = await database.createDocument(
+        "669df904001bd01960db",
+        "669df922001cf2f83cf6",
+        ID.unique(),
+        {
+          userId: user.email,
+        }
+      );
+      console.log(response);
+    } catch (e) {
+      console.error(e);
     }
+  }
+
   return (
     <div className="w-full max-w-4xl mx-auto py-8 px-4 md:px-6">
       <div className="grid md:grid-cols-[1fr_2fr] gap-8">
         <div className="bg-muted rounded-lg p-6 border-2 border-neutral-300 bg-neutral-200">
           <div className="flex items-center gap-4">
             <Avatar className="h-16 w-16">
-              <AvatarImage src={profile ? profile.imgUrl : "https://github.com/shadcn.png"} />
+              <AvatarImage
+                src={
+                  profile && profile.imgUrl
+                    ? profile.imgUrl
+                    : "https://github.com/shadcn.png"
+                }
+              />
               <AvatarFallback>A</AvatarFallback>
             </Avatar>
             <div className="grid gap-1">
-              <div className="text-xl font-semibold">{user ? user.name : "Loading..."}</div>
+              <div className="text-xl font-semibold">
+                {user ? user.name : "Loading..."}
+              </div>
               <div className="text-sm text-muted-foreground">
-                {user ? user.email : 'Loading...'}
+                {user ? user.email : "Loading..."}
               </div>
             </div>
           </div>
           <Separator className="my-4" />
           <div className="prose text-muted-foreground">
-            <p>
-                {profile ? profile.bio : <p>No bio yet!</p>}
-            </p>
+            <p>{profile && profile.bio ? profile.bio : <p>No bio yet!</p>}</p>
           </div>
           <div className="flex flex-wrap gap-2 mt-4">
-            {
-                profile ? profile.intrests.map((item: string)=><Badge variant="secondary">{item}</Badge>) : <p className="px-4 py-2 border-2 border-neutral-200 bg-neutral-50 rounded-lg">No Intrests added yet!</p>
-            }
+            {profile && profile.intrests ? (
+              profile.intrests.map((item: string) => (
+                <Badge key={item} variant="secondary">
+                  {item}
+                </Badge>
+              ))
+            ) : (
+              <p className="px-4 py-2 border-2 border-neutral-200 bg-neutral-50 rounded-lg">
+                No Interests added yet!
+              </p>
+            )}
           </div>
           <div className="relative right-5 my-4">
-      <MultipleSelectorDemo />
+            <MultipleSelectorDemo />
           </div>
         </div>
         <div className="grid gap-6">

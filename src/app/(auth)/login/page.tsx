@@ -1,15 +1,11 @@
-"use client"
-import { account } from "@/app/appwrite";
-import LoginForm from "@/components/LoginForm";
-import { useEffect } from "react";
+"use client";
 
-export default function Login(){
-    useEffect(()=>{
-        account.deleteSession('current');
-    }, []);
-    return (
-        <div>
-            <LoginForm />
-        </div>
-    );
+import LoginForm from "@/components/LoginForm";
+
+export default function Login() {
+  return (
+    <div>
+      <LoginForm />
+    </div>
+  );
 }
