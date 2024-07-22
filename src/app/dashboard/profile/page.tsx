@@ -94,6 +94,9 @@ export default function Component() {
           </div>
           <div className="relative right-5 my-4">
             <MultipleSelectorDemo />
+            <button className="px-4 py-2 hover:bg-neutral-700 bg-neutral-800 text-sm relative left-12 rounded-md text-white">
+              Update Intrests
+            </button>
           </div>
         </div>
         <div className="grid gap-6">

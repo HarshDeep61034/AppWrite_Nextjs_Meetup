@@ -24,10 +24,10 @@ export default function LoginForm(props: any) {
     try {
       setLoading(true);
       if(authMethod == "email"){
-        await account.createSession(email, password);
+        await account.createEmailPasswordSession(email, password);
       }
       else if(authMethod == "phone"){
-        await account.createSession(phone, password);
+        // await account.createPhonePassword;
       }
       router.push("/dashboard");
     } catch (e) {
@@ -109,7 +109,7 @@ export default function LoginForm(props: any) {
           Already have an account?{" "}
           <button
             className="font-semibold py-4 text-center hover:underline"
-            onClick={() => router.push("/login")}
+            onClick={() => router.push("/")}
           >
             SignUp
           </button>

@@ -31,13 +31,7 @@ export function DialogDemo() {
             <Label htmlFor="bio" className="text-right">
               Bio
             </Label>
-            <Input id="bio" value="Hey I'm on EventX" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="intrests" className="text-right">
-              Intrests
-            </Label>
-            <MultipleSelectorDemo />
+            <Input id="bio" placeholder="Hey I'm on EventX" className="w-full col-span-3" />
           </div>
         </div>
         <DialogFooter>
